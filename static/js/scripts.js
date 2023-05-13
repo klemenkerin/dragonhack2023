@@ -124,6 +124,9 @@ window.addEventListener('DOMContentLoaded', event => {
         })
         .then(response => response.json())
         .then(response => document.getElementById("meme_div").innerHTML = "<img src=" + response.preview[response.preview.length - 1] + " alt='meme' width='500' height='600'>")
+
+        sound = new Audio('static/assets/sounds/laugh.mp3');
+        sound.play();
     });
 
     const fun_mode = document.getElementById("fun_mode");
