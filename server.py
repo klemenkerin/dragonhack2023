@@ -26,8 +26,10 @@ def explain():
 
     # get the explanation
     explanation = chatgpt_api.send_single_request(token, model, prompt)
+    explanation = explanation.json()['choices'][0]['message']['content']
+    print(explanation)
 
-    return explanation.json()['choices'][0]['message']['content']
+    return jsonify({'explanation': explanation})
 
 #API for code translation
 @app.route('/api/translate', methods=['POST'])
@@ -46,14 +48,31 @@ def translate():
     print(explanation)
     # Return the explanation as a json object
     return jsonify({'explanation': explanation})
+
+#API for code debug
+@app.route('/api/debug', methods=['POST'])
+def debug():
+    # Read the prompt from the get request
+    data = request.get_json()
+    code = data.get('code')
+    input_language = data.get('input_language')
+    prompt = f'Debug this {input_language} code:\n{code}'
+
+    # get the explanation
+    explanation = chatgpt_api.send_single_request(token, model, prompt)
+    explanation = explanation.json()['choices'][0]['message']['content']
+    print(explanation)
+
+    return jsonify({'explanation': explanation})
     
 
 #API for generating data structure of program from description
-@app.route('/api/generate_structure', methods=['POST'])
+@app.route('/api/structure', methods=['POST'])
 def generate_structure():
     try:
         conversation = []
 
+<<<<<<< HEAD
         # Read the prompt from the get request
         data = request.get_json()
         description = data.get('description')
@@ -125,6 +144,18 @@ def generate_structure():
     
     except Exception as e:
         return jsonify({'error': str(e)})
+=======
+    # get the explanation
+    commands = chatgpt_api.send_single_request(token, model, prompt)
+    commands.json()['choices'][0]['message']['content']
+    print(commands)
+    # Return the explanation as a json object
+
+    #run the commands in the terminal
+    os.system(commands)
+
+    return jsonify({"done": "true"})
+>>>>>>> 8206620ec645fa55aded43ebd2750defc645ee18
 
 if __name__ == '__main__':
     with open('key.txt', 'r') as f:
