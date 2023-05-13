@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .fun_mode {
+          cursor: url('../static/assets/img/emoji.png') 10 10, auto;
+        }
+      </style>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -50,10 +55,11 @@
         <section class="about-section text-center" id="about">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" id="meme_container">
                         <h2 class="text-white mb-4" id="smaller_title">Enter your code</h2>
                         <button class="btn btn-primary btn-fun" id="submit_meme" style="visibility: hidden;">Press me !</button>
                         <div id="meme_div" style="margin-top: 10px;"></div>
+                        <button class="btn btn-primary btn-fun" id="offensive_meme" style="visibility: hidden; position: absolute; margin-top: 10px;">I find this meme offensive</button>
                         <textarea id="code" name="code" rows="20" cols="80"></textarea>
                         <div class="row margin-top" id="dropdowns">
                             <div id="drop_down_input" class="col-md-6">

@@ -3,12 +3,14 @@ let code = "";
 
 window.addEventListener('DOMContentLoaded', event => {
 
+    // Remove backslash from post request response
     function remove_backslash(str) {
         str = str.slice(1, -1);
         str = str.replace(/\\n/g, "<br>");
         return str.replace(/([^\\]|^)\\([^n])/g, "$1$2");
     }
 
+    // Add event listeners to explain button, calls explain endpoint
     document.getElementById("submit_button_explain").addEventListener("click", function() {
         code = document.getElementById("code").value
 
@@ -29,6 +31,7 @@ window.addEventListener('DOMContentLoaded', event => {
         .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
 
+    // Add event listeners to translate button, calls translate endpoint
     document.getElementById("submit_button_translate").addEventListener("click", function() {
         code = document.getElementById("code").value
 
@@ -51,6 +54,7 @@ window.addEventListener('DOMContentLoaded', event => {
         .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
 
+    // Add event listeners to debug button, calls debug endpoint
     document.getElementById("submit_button_debug").addEventListener("click", function() {
         code = document.getElementById("code").value
 
@@ -71,6 +75,7 @@ window.addEventListener('DOMContentLoaded', event => {
         .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
 
+    // Add event listeners to structure button, calls structure endpoint
     document.getElementById("submit_button_structure").addEventListener("click", function() {
         code = document.getElementById("code").value
 
@@ -112,6 +117,7 @@ window.addEventListener('DOMContentLoaded', event => {
     });
     });
 
+    // Add event listeners to meme button, calls meme endpoint
     document.getElementById("submit_meme").addEventListener("click", function() {
         code = document.getElementById("code").value
 
@@ -127,7 +133,34 @@ window.addEventListener('DOMContentLoaded', event => {
 
         sound = new Audio('static/assets/sounds/laugh.mp3');
         sound.play();
+
+        button = document.getElementById("offensive_meme");
+        button.style.visibility = "visible";
+        button.style.position = "absolute";
+        button.style.left = "";
+        button.style.top = "";
+        console.log(button.style);
     });
+
+    // Evasive button
+    document.getElementById('offensive_meme').addEventListener('mouseover', function() {
+        const randomButton = this;
+        const container = document.getElementById('meme_container');
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const buttonWidth = randomButton.clientWidth;
+        const buttonHeight = randomButton.clientHeight;
+    
+        const randomX = Math.floor(Math.random() * (containerWidth - buttonWidth));
+        const randomY = Math.floor(Math.random() * (containerHeight - buttonHeight));
+    
+        randomButton.style.left = randomX + 'px';
+        randomButton.style.top = randomY + 'px';
+
+        sound = new Audio('static/assets/sounds/fart.mp3');
+        sound.play();
+    });
+      
 
     const fun_mode = document.getElementById("fun_mode");
 
@@ -150,6 +183,9 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("meme_div").style.visibility = "visible";
             document.getElementById("projects").style.display = "none";
             document.getElementById("smaller_title").innerText = "Generate your meme !";
+            document.getElementById("page-top").classList.add("fun_mode");
+
+
             //bubbles()  
         } else {
             mode = "serious"
@@ -166,10 +202,12 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("dropdowns").style.visibility = "visible";
             document.getElementById("code").style.visibility = "visible";
             document.getElementById("submit_meme").style.visibility = "hidden";
+            document.getElementById("offensive_meme").style.visibility = "hidden";
             document.getElementById("meme_div").innerHTML = "";
             document.getElementById("meme_div").style.visibility = "hidden";
             document.getElementById("projects").style.display = "block";
             document.getElementById("smaller_title").innerText = "Enter your code";
+            document.getElementById("page-top").classList.remove("fun_mode");
             //bubbles()  
         }
     });
