@@ -2,7 +2,6 @@ let mode = "serious";
 let code = "";
 
 window.addEventListener('DOMContentLoaded', event => {
-
     // // Navbar shrink function
     // var navbarShrink = function () {
     //     const navbarCollapsible = document.body.querySelector('#mainNav');
@@ -45,10 +44,21 @@ window.addEventListener('DOMContentLoaded', event => {
     //     });
     // });
 
+    // function remove_backslash(content) {
+    //     // content = content.slice(1, 0)
+    //     // content = content.slice(0, -1)
+    //     content = content.replace('\\', '')
+    //     return content.replace('\"', '"');
+    // }
 
+    function remove_backslash(str) {
+        return str.replace(/\\/g, "");
+    }
 
     document.getElementById("submit_button_explain").addEventListener("click", function() {
         code = document.getElementById("code").value
+
+        let input_language = document.getElementById("dropdown1").value;
 
         fetch('http://localhost:8080/api/explain', {
         method: 'POST',
@@ -58,15 +68,18 @@ window.addEventListener('DOMContentLoaded', event => {
         },
         body: JSON.stringify({
             "code": code,
-            "input_language" : "C"
+            "input_language" : input_language,
             })
         })
         .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
+        .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
 
     document.getElementById("submit_button_translate").addEventListener("click", function() {
         code = document.getElementById("code").value
+
+        let input_language = document.getElementById("dropdown1").value;
+        let output_language = document.getElementById("dropdown2").value;
 
         fetch('http://localhost:8080/api/translate', {
         method: 'POST',
@@ -76,16 +89,38 @@ window.addEventListener('DOMContentLoaded', event => {
         },
         body: JSON.stringify({
             "code": code,
-            "input_language" : "C",
-            "output_language" : "python"  
+            "input_language" : input_language,
+            "output_language" : output_language  
             })
         })
         .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
+        .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
+    });
+
+    document.getElementById("submit_button_debug").addEventListener("click", function() {
+        code = document.getElementById("code").value
+
+        let input_language = document.getElementById("dropdown1").value;
+
+        fetch('http://localhost:8080/api/debug', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "code": code,
+            "input_language" : input_language,
+            })
+        })
+        .then(response => response.json())
+        .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
 
     document.getElementById("submit_button_structure").addEventListener("click", function() {
         code = document.getElementById("code").value
+
+        let language = document.getElementById("dropdown1").value;
 
         fetch('http://localhost:8080/api/structure', {
         method: 'POST',
@@ -95,11 +130,11 @@ window.addEventListener('DOMContentLoaded', event => {
         },
         body: JSON.stringify({
             "code": code,
-            "languages": "Python, Javascript" 
+            "languages": language 
             })
         })
         .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
+        .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
     });
     });
 
@@ -112,10 +147,11 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead_fun");
             document.getElementById("fun_mode").innerHTML = "Serious Mode"
             document.getElementById("enter_button").classList.add("btn-fun");
-            document.getElementById("submit_button").classList.add("btn-fun");
+            document.getElementById("submit_button_explain").classList.add("btn-fun");
+            document.getElementById("submit_button_translate").classList.add("btn-fun");
+            document.getElementById("submit_button_structure").classList.add("btn-fun");
             document.getElementById("quote").innerHTML = "For every man's action there's a woman's overreaction."
             document.getElementById("title").innerHTML = "Meme Asssistant"
-
             //bubbles()  
         } else {
             mode = "serious"
@@ -123,16 +159,17 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead");
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
             document.getElementById("enter_button").classList.remove("btn-fun");
-            document.getElementById("submit_button").classList.remove("btn-fun");
+            document.getElementById("submit_button_explain").classList.remove("btn-fun");
+            document.getElementById("submit_button_translate").classList.remove("btn-fun");
+            document.getElementById("submit_button_structure").classList.remove("btn-fun");
             document.getElementById("quote").innerHTML = "The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking."
             document.getElementById("title").innerHTML = "Code Asssistant"
-            
             //bubbles()  
         }
-        
     });
 
-    
+
+
 
 // function bubbles() {
 //     if (mode === "fun") {

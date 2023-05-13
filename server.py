@@ -25,8 +25,10 @@ def explain():
 
     # get the explanation
     explanation = chatgpt_api.send_single_request(token, model, prompt)
+    explanation = explanation.json()['choices'][0]['message']['content']
+    print(explanation)
 
-    return explanation.json()['choices'][0]['message']['content']
+    return jsonify({'explanation': explanation})
 
 #API for code translation
 @app.route('/api/translate', methods=['POST'])
@@ -45,10 +47,26 @@ def translate():
     print(explanation)
     # Return the explanation as a json object
     return jsonify({'explanation': explanation})
+
+#API for code debug
+@app.route('/api/debug', methods=['POST'])
+def debug():
+    # Read the prompt from the get request
+    data = request.get_json()
+    code = data.get('code')
+    input_language = data.get('input_language')
+    prompt = f'Debug this {input_language} code:\n{code}'
+
+    # get the explanation
+    explanation = chatgpt_api.send_single_request(token, model, prompt)
+    explanation = explanation.json()['choices'][0]['message']['content']
+    print(explanation)
+
+    return jsonify({'explanation': explanation})
     
 
 #API for generating data structure of program from description
-@app.route('/api/generate_structure', methods=['POST'])
+@app.route('/api/structure', methods=['POST'])
 def generate_structure():
     # Read the prompt from the get request
     data = request.get_json()
@@ -58,11 +76,15 @@ def generate_structure():
     prompt = f'Generate the folder data structure for a program using linux terminal comands. The program is in {languages}, with this description:\n{description}\n'
 
     # get the explanation
-    explanation = chatgpt_api.send_single_request(token, model, prompt)
-
-    print(explanation.json()['choices'][0]['message']['content'])
+    commands = chatgpt_api.send_single_request(token, model, prompt)
+    commands.json()['choices'][0]['message']['content']
+    print(commands)
     # Return the explanation as a json object
-    return explanation.json()['choices'][0]['message']['content']
+
+    #run the commands in the terminal
+    os.system(commands)
+
+    return jsonify({"done": "true"})
 
 if __name__ == '__main__':
     with open('key.txt', 'r') as f:

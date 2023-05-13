@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Code Assistant</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -53,9 +53,35 @@
                     <div class="col-lg-8">
                         <h2 class="text-white mb-4">Enter your code</h2>
                         <textarea id="code" name="code" rows="20" cols="80"></textarea>
-                        <button class="btn btn-primary" id="submit_button_explain">Explain</button>
-                        <button class="btn btn-primary" id="submit_button_translate">Translate</button>
-                        <button class="btn btn-primary" id="submit_button_structure">Structure</button>
+                        <div class="row margin-top">
+                            <div id="drop_down_input" class="col-md-6">
+                                <p style="color:white;">Input language</p>
+                                <select class="form-select" id="dropdown1">
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                    <option value="C">C</option>
+                                    <option value="C++">C++</option>
+                                    <option value="Javascript">Javascript</option>
+                                </select>
+                            </div>  
+                            <div id="drop_down_output" class="col-md-6">
+                                <p style="color:white;">Output language</p>
+                                <select class="form-select" id="dropdown2">
+                                    <option value="Python">Python</option>
+                                    <option value="Java">Java</option>
+                                    <option value="C">C</option>
+                                    <option value="C++">C++</option>
+                                    <option value="Javascript">Javascript</option>
+                                </select>
+                            </div>  
+                        </div>
+                        
+                        <div class="margin-top">
+                            <button class="btn btn-primary" id="submit_button_explain">Explain</button>
+                            <button class="btn btn-primary" id="submit_button_translate">Translate</button>
+                            <button class="btn btn-primary" id="submit_button_debug">Debug</button>
+                            <button class="btn btn-primary" id="submit_button_structure">Structure</button>
+                        </div>
                     </div>
                 </div>
                 <!--<img class="img-fluid" src="assets/img/ipad.png" alt="..." />-->
@@ -64,7 +90,11 @@
         <!-- Projects-->
 
         <section class="projects-section bg-light" id="projects">
-
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <p id="content"></p>
+                </div>
+            </div>
         </section>
         
         <!-- Footer-->
