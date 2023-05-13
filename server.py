@@ -42,9 +42,10 @@ def translate():
 
     prompt = f'Translate the following {input_language} code to {output_language} :\n{code}'
 
-    # get the explanation
+    # Get the explanation and preprocess it
     explanation = chatgpt_api.send_single_request(token, model, prompt)
     explanation = explanation.json()['choices'][0]['message']['content']
+
     print(explanation)
     # Return the explanation as a json object
     return jsonify({'explanation': explanation})

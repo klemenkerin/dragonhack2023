@@ -51,8 +51,14 @@ window.addEventListener('DOMContentLoaded', event => {
     //     return content.replace('\"', '"');
     // }
 
+    // function remove_backslash(str) {
+    //     return str.replace(/\\/g, "");
+    // }
+
     function remove_backslash(str) {
-        return str.replace(/\\/g, "");
+        str = str.slice(1, -1);
+        str = str.replace(/\\n/g, "<br>");
+        return str.replace(/([^\\]|^)\\([^n])/g, "$1$2");
     }
 
     document.getElementById("submit_button_explain").addEventListener("click", function() {
