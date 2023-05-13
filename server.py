@@ -73,7 +73,6 @@ def generate_structure():
     try:
         conversation = []
 
-<<<<<<< HEAD
         # Read the prompt from the get request
         data = request.get_json()
         description = data.get('description')
@@ -145,18 +144,6 @@ def generate_structure():
     
     except Exception as e:
         return jsonify({'error': str(e)})
-=======
-    # get the explanation
-    commands = chatgpt_api.send_single_request(token, model, prompt)
-    commands.json()['choices'][0]['message']['content']
-    print(commands)
-    # Return the explanation as a json object
-
-    #run the commands in the terminal
-    os.system(commands)
-
-    return jsonify({"done": "true"})
->>>>>>> 8206620ec645fa55aded43ebd2750defc645ee18
 
 if __name__ == '__main__':
     with open('key.txt', 'r') as f:

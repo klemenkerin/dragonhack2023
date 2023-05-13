@@ -126,20 +126,15 @@ window.addEventListener('DOMContentLoaded', event => {
     document.getElementById("submit_button_structure").addEventListener("click", function() {
         code = document.getElementById("code").value
 
-<<<<<<< HEAD
-        fetch('http://localhost:8080/api/generate_structure', {
-=======
         let language = document.getElementById("dropdown1").value;
 
         fetch('http://localhost:8080/api/structure', {
->>>>>>> 8206620ec645fa55aded43ebd2750defc645ee18
         method: 'POST',
         headers: {
             'Accept': 'application/zip',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-<<<<<<< HEAD
             "description": code,
             "languages": "Python, C" 
             })
@@ -166,14 +161,6 @@ window.addEventListener('DOMContentLoaded', event => {
         .catch(error => {
             console.log(error);
         });
-=======
-            "code": code,
-            "languages": language 
-            })
-        })
-        .then(response => response.json())
-        .then(response => document.getElementById("content").innerHTML = remove_backslash(JSON.stringify(response.explanation)))
->>>>>>> 8206620ec645fa55aded43ebd2750defc645ee18
     });
     });
 
