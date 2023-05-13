@@ -51,9 +51,11 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8">
-                        <h2 class="text-white mb-4">Enter your code</h2>
+                        <h2 class="text-white mb-4" id="smaller_title">Enter your code</h2>
+                        <button class="btn btn-primary btn-fun" id="submit_meme" style="visibility: hidden;">Press me !</button>
+                        <div id="meme_div" style="margin-top: 10px;"></div>
                         <textarea id="code" name="code" rows="20" cols="80"></textarea>
-                        <div class="row margin-top">
+                        <div class="row margin-top" id="dropdowns">
                             <div id="drop_down_input" class="col-md-6">
                                 <p style="color:white;">Input language</p>
                                 <select class="form-select" id="dropdown1">

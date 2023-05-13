@@ -2,58 +2,6 @@ let mode = "serious";
 let code = "";
 
 window.addEventListener('DOMContentLoaded', event => {
-    // // Navbar shrink function
-    // var navbarShrink = function () {
-    //     const navbarCollapsible = document.body.querySelector('#mainNav');
-    //     if (!navbarCollapsible) {
-    //         return;
-    //     }
-    //     if (window.scrollY === 0) {
-    //         navbarCollapsible.classList.remove('navbar-shrink')
-    //     } else {
-    //         navbarCollapsible.classList.add('navbar-shrink')
-    //     }
-
-    // };
-
-    // Shrink the navbar 
-    // navbarShrink();
-
-    // Shrink the navbar when page is scrolled
-    // document.addEventListener('scroll', navbarShrink);
-
-    // Activate Bootstrap scrollspy on the main nav element
-    // const mainNav = document.body.querySelector('#mainNav');
-    // if (mainNav) {
-    //     new bootstrap.ScrollSpy(document.body, {
-    //         target: '#mainNav',
-    //         rootMargin: '0px 0px -40%',
-    //     });
-    // };
-
-    // Collapse responsive navbar when toggler is visible
-    // const navbarToggler = document.body.querySelector('.navbar-toggler');
-    // const responsiveNavItems = [].slice.call(
-    //     document.querySelectorAll('#navbarResponsive .nav-link')
-    // );
-    // responsiveNavItems.map(function (responsiveNavItem) {
-    //     responsiveNavItem.addEventListener('click', () => {
-    //         if (window.getComputedStyle(navbarToggler).display !== 'none') {
-    //             navbarToggler.click();
-    //         }
-    //     });
-    // });
-
-    // function remove_backslash(content) {
-    //     // content = content.slice(1, 0)
-    //     // content = content.slice(0, -1)
-    //     content = content.replace('\\', '')
-    //     return content.replace('\"', '"');
-    // }
-
-    // function remove_backslash(str) {
-    //     return str.replace(/\\/g, "");
-    // }
 
     function remove_backslash(str) {
         str = str.slice(1, -1);
@@ -164,6 +112,20 @@ window.addEventListener('DOMContentLoaded', event => {
     });
     });
 
+    document.getElementById("submit_meme").addEventListener("click", function() {
+        code = document.getElementById("code").value
+
+        fetch('https://meme-api.com/gimme', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        })
+        .then(response => response.json())
+        .then(response => document.getElementById("meme_div").innerHTML = "<img src=" + response.preview[response.preview.length - 1] + " alt='meme' width='500' height='600'>")
+    });
+
     const fun_mode = document.getElementById("fun_mode");
 
     fun_mode.addEventListener("click", function() {
@@ -173,11 +135,18 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead_fun");
             document.getElementById("fun_mode").innerHTML = "Serious Mode"
             document.getElementById("enter_button").classList.add("btn-fun");
-            document.getElementById("submit_button_explain").classList.add("btn-fun");
-            document.getElementById("submit_button_translate").classList.add("btn-fun");
-            document.getElementById("submit_button_structure").classList.add("btn-fun");
             document.getElementById("quote").innerHTML = "For every man's action there's a woman's overreaction."
             document.getElementById("title").innerHTML = "Meme Asssistant"
+            document.getElementById("submit_button_explain").style.visibility = "hidden";
+            document.getElementById("submit_button_translate").style.visibility = "hidden";
+            document.getElementById("submit_button_structure").style.visibility = "hidden";
+            document.getElementById("submit_button_debug").style.visibility = "hidden";
+            document.getElementById("dropdowns").style.visibility = "hidden";
+            document.getElementById("code").style.visibility = "hidden";
+            document.getElementById("submit_meme").style.visibility = "visible";
+            document.getElementById("meme_div").style.visibility = "visible";
+            document.getElementById("projects").style.display = "none";
+            document.getElementById("smaller_title").innerText = "Generate your meme !";
             //bubbles()  
         } else {
             mode = "serious"
@@ -185,11 +154,19 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead");
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
             document.getElementById("enter_button").classList.remove("btn-fun");
-            document.getElementById("submit_button_explain").classList.remove("btn-fun");
-            document.getElementById("submit_button_translate").classList.remove("btn-fun");
-            document.getElementById("submit_button_structure").classList.remove("btn-fun");
             document.getElementById("quote").innerHTML = "The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking."
             document.getElementById("title").innerHTML = "Code Asssistant"
+            document.getElementById("submit_button_explain").style.visibility = "visible";
+            document.getElementById("submit_button_translate").style.visibility = "visible";
+            document.getElementById("submit_button_structure").style.visibility = "visible";
+            document.getElementById("submit_button_debug").style.visibility = "visible";
+            document.getElementById("dropdowns").style.visibility = "visible";
+            document.getElementById("code").style.visibility = "visible";
+            document.getElementById("submit_meme").style.visibility = "hidden";
+            document.getElementById("meme_div").innerHTML = "";
+            document.getElementById("meme_div").style.visibility = "hidden";
+            document.getElementById("projects").style.display = "block";
+            document.getElementById("smaller_title").innerText = "Enter your code";
             //bubbles()  
         }
     });
