@@ -45,9 +45,27 @@ window.addEventListener('DOMContentLoaded', event => {
     //     });
     // });
 
-    const submit_button = document.getElementById("submit_button");
 
-    submit_button.addEventListener("click", function() {
+
+    document.getElementById("submit_button_explain").addEventListener("click", function() {
+        code = document.getElementById("code").value
+
+        fetch('http://localhost:8080/api/explain', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "code": code,
+            "input_language" : "C"
+            })
+        })
+        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)))
+    });
+
+    document.getElementById("submit_button_translate").addEventListener("click", function() {
         code = document.getElementById("code").value
 
         fetch('http://localhost:8080/api/translate', {
@@ -60,6 +78,24 @@ window.addEventListener('DOMContentLoaded', event => {
             "code": code,
             "input_language" : "C",
             "output_language" : "python"  
+            })
+        })
+        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)))
+    });
+
+    document.getElementById("submit_button_structure").addEventListener("click", function() {
+        code = document.getElementById("code").value
+
+        fetch('http://localhost:8080/api/structure', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "code": code,
+            "languages": "Python, Javascript" 
             })
         })
         .then(response => response.json())
