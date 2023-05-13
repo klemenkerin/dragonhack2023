@@ -1,5 +1,6 @@
 import os
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
+import numpy as np
 
 import chatgpt_api
 
@@ -50,19 +51,80 @@ def translate():
 #API for generating data structure of program from description
 @app.route('/api/generate_structure', methods=['POST'])
 def generate_structure():
-    # Read the prompt from the get request
-    data = request.get_json()
-    description = data.get('description')
-    languages = data.get('languages') #list of languages
+    try:
+        conversation = []
+
+        # Read the prompt from the get request
+        data = request.get_json()
+        description = data.get('description')
+        languages = data.get('languages') #list of languages
+        
+        prompt = f'Generate the entire data structure (directories and populate it with files) for a program using linux terminal comands mkdir without any explanations. The program is in {languages}, with this description:\n{description}\n'
+
+        # get the explanation
+        commands, conversation = chatgpt_api.send_request(token, model, prompt, conversation)
+
+        # print(commands)
+
+        # run the commands in a linux terminal, in tmp_files folder
+        os.system(f'cd tmp_files && {commands}')
+
+        # print tree of the folder structure and pipe it to string variable
+        tree = os.popen('cd tmp_files && tree').read()
+
+        # print all the files in the folder and all the subfolders and pipe it to string variable
+        files = os.popen('cd tmp_files && find . -type f').read()
+
+        # prompt for the explanation of the files
+        prompt = f'The strucure of the program is:\n{tree}\n\nOnly the files are:\n{files}\n\nSelect only those files that are scripts (have to be coded) and order them by order of development, from the first to the last and output it like this: [file1, file2, file3, ...].\n'
+
+        # get the array of files
+        files, conversation = chatgpt_api.send_request(token, model, prompt, conversation)
+
+        # files to array
+        files = files.replace('[', '').replace(']', '').replace(' ', '').split(',')
+
+        print("files:", files)
+
+        # for files or max 5 files
+        i = 0
+        for file in files[:5]:
+            print("at file: ", file)
+
+            # prompt to generate barebone code
+            prompt = f'Generate simple code for {file}. Output only code in pure text.\n'
+
+            # get the code
+            code, conversation = chatgpt_api.send_request(token, model, prompt, conversation)
+
+            # save the code to file
+            with open(f'tmp_files/{file}', 'w') as f:
+                f.write(code)
+
+            print("made file: ", file)
+            i += 1
+
+
+        ###########################################
+
+        # print(tree)
+
+        # delete the zip file if it exists
+        os.system('rm -rf tmp_files.zip')
+
+        # zip the folder and save it to variable
+        os.system('cd tmp_files && zip -r ../tmp_files.zip .')
+
+
+        # delete everything in tmp_files folder
+        os.system('rm -rf tmp_files/*')
+
+        # Download the zip file
+        # return send_file(zip_file, as_attachment=True, mimetype='application/zip', download_name='data_structure.zip')
+        return send_file('tmp_files.zip', as_attachment=True)
     
-    prompt = f'Generate the folder data structure for a program using linux terminal comands. The program is in {languages}, with this description:\n{description}\n'
-
-    # get the explanation
-    explanation = chatgpt_api.send_single_request(token, model, prompt)
-
-    print(explanation.json()['choices'][0]['message']['content'])
-    # Return the explanation as a json object
-    return explanation.json()['choices'][0]['message']['content']
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     with open('key.txt', 'r') as f:

@@ -87,19 +87,39 @@ window.addEventListener('DOMContentLoaded', event => {
     document.getElementById("submit_button_structure").addEventListener("click", function() {
         code = document.getElementById("code").value
 
-        fetch('http://localhost:8080/api/structure', {
+        fetch('http://localhost:8080/api/generate_structure', {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
+            'Accept': 'application/zip',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "code": code,
-            "languages": "Python, Javascript" 
+            "description": code,
+            "languages": "Python, C" 
             })
         })
-        .then(response => response.json())
-        .then(response => console.log(JSON.stringify(response)))
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            } else {
+                throw new Error('Request failed.');
+            }
+        })
+        .then(blob => {
+            // Create a temporary <a> element to trigger the download
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'data_structure.zip';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     });
     });
 
