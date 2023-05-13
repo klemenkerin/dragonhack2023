@@ -144,6 +144,19 @@ def generate_structure():
     
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+#API for getting a joke
+@app.route('/api/joke', methods=['GET'])
+def joke():
+    # Read the prompt from the get request
+    prompt = f'Tell me a very short joke:\n'
+
+    # get the explanation
+    joke = chatgpt_api.send_single_request(token, model, prompt)
+    joke = joke.json()['choices'][0]['message']['content']
+    print(joke)
+
+    return jsonify({'joke': joke})
 
 if __name__ == '__main__':
     with open('key.txt', 'r') as f:
