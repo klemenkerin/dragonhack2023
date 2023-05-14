@@ -2,7 +2,28 @@
 <html lang="en">
     <style>
         .fun_mode {
-          cursor: url('../static/assets/img/emoji.png') 10 10, auto;
+            cursor: url('../static/assets/img/emoji_2.png') 15 15, auto;
+        }
+        .buton_smile_fun:hover {
+            cursor: url('../static/assets/img/emoji.png') 15 15, auto;
+        }
+        .image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .image-container img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            max-width: 100%;
+            max-height: 100%;
         }
       </style>
     <head>
@@ -46,18 +67,23 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase" id="title">Code Assistant</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5" id="quote">The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.</h2>
-                        <a class="btn btn-primary" href="#about" id="enter_button">Get Started</a>
+                        <a class="btn btn-primary buton_smile" href="#about" id="enter_button">Get Started</a>
                     </div>
                 </div>
             </div>
         </header>
+        <!--cover image-->
+        <div class="image-container" style="visibility: hidden;" id="stop">
+            <button onclick="pressFirstButton()"><img src="../static/assets/img/uncle_sam.jpg" alt="Go back to work!"></button>
+        </div>
+
         <!-- About-->
         <section class="about-section text-center" id="about">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8" id="meme_container">
                         <h2 class="text-white mb-4" id="smaller_title">Enter your code</h2>
-                        <button class="btn btn-primary btn-fun" id="submit_meme" style="visibility: hidden;">Press me !</button>
+                        <button class="btn btn-primary btn-fun buton_smile" id="submit_meme" style="visibility: hidden;">Press me !</button>
                         <div id="meme_div" style="margin-top: 10px;"></div>
                         <button class="btn btn-primary btn-fun" id="offensive_meme" style="visibility: hidden; position: absolute; margin-top: 10px;">I find this meme offensive</button>
                         <textarea id="code" name="code" rows="20" cols="80"></textarea>

@@ -1,6 +1,9 @@
 let mode = "serious";
 let code = "";
 
+let new_meme_generator_count=0;
+let listen_to_work_press = null;
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Remove backslash from post request response
@@ -119,6 +122,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     // Add event listeners to meme button, calls meme endpoint
     document.getElementById("submit_meme").addEventListener("click", function() {
+        new_meme_generator_count++;
         code = document.getElementById("code").value
 
         fetch('https://meme-api.com/gimme', {
@@ -139,7 +143,10 @@ window.addEventListener('DOMContentLoaded', event => {
         button.style.position = "absolute";
         button.style.left = "";
         button.style.top = "";
-        console.log(button.style);
+        if(!check_number_of_opened_memes(new_meme_generator_count)){
+            // to do : add a message that says YOU HAVE TO GET BACK TO WORK
+            document.getElementById("stop").style.visibility = "visible";
+        }
     });
 
     // Evasive button
@@ -184,11 +191,13 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("projects").style.display = "none";
             document.getElementById("smaller_title").innerText = "Generate your meme !";
             document.getElementById("page-top").classList.add("fun_mode");
-
-
+            document.querySelectorAll('.buton_smile').forEach(el => el.classList.add('buton_smile_fun'));
+            new_meme_generator_count=0;
+            listen_to_work_press = null;
             //bubbles()  
         } else {
             mode = "serious"
+            document.getElementById("stop").style.visibility = "hidden";
             document.getElementById("header").classList.remove("masthead_fun");
             document.getElementById("header").classList.add("masthead");
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
@@ -208,12 +217,23 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("projects").style.display = "block";
             document.getElementById("smaller_title").innerText = "Enter your code";
             document.getElementById("page-top").classList.remove("fun_mode");
+            document.querySelectorAll('.buton_smile').forEach(el => el.classList.remove('buton_smile_fun'));
             //bubbles()  
         }
     });
 
 
+function check_number_of_opened_memes(count){
+    if (count > 5){
+       return false;
+    }
+    return true;
+}
 
+function pressFirstButton() {
+    var btn = document.getElementById("fun_mode");
+    btn.click();
+}
 
 // function bubbles() {
 //     if (mode === "fun") {
