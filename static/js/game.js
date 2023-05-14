@@ -1,4 +1,3 @@
-const grid = document.querySelector('.grid')
 const duckWidth = 30
 const duckHeight = 30
 const boardWidth = 50
@@ -9,7 +8,7 @@ let xDirection = -2
 let yDirection = 2
 let user = null;
 
-const userStart = [230, 10]
+const userStart = [600, -520]
 let currentPosition = userStart
 
 let timerId1
@@ -17,6 +16,26 @@ let timerId2
 let score = 0
 
 let start = null
+
+let gridLeft = "";
+let gridTop = "";
+
+window.addEventListener('DOMContentLoaded', event => {
+  document.getElementById('play_game').addEventListener('click', function() {
+    document.getElementById("game").style.display = "block";
+    document.getElementById("offensive_meme").style.display = "block";
+    document.getElementById("saso").style.display = "block";
+    document.getElementById("meme_div").style.display = "none";
+
+    gameOver()
+
+    let rect = document.getElementById("game").getBoundingClientRect();
+
+    gridLeft = rect.left;
+    gridTop = rect.top;
+  });
+});
+
 
 //my duck
 class Duck {
@@ -34,9 +53,9 @@ const ducks = []
 // generate ducks
 function addDuck(){
   // random position x between 0 and 470
-  let randomPosition = Math.floor(Math.random() * 470)
+  let randomPosition = Math.floor(Math.random() * 470 + gridLeft)
   // create new duck
-  let duck_gen = new Duck(randomPosition, 270)
+  let duck_gen = new Duck(randomPosition, -220)
   // duck div
   const duck = document.createElement('div')
   duck.classList.add('duck')
@@ -54,7 +73,7 @@ function moveDuck() {
   for (let i = 0; i < ducks.length; i++) {
     ducks[i].style.bottom = parseInt(ducks[i].style.bottom) - 10 + 'px'
     // remove duck from array
-    if (parseInt(ducks[i].style.bottom) < 0) {
+    if (parseInt(ducks[i].style.bottom) < -520) {
       ducks[i].remove()
       ducks.splice(i, 1)
       score++;
@@ -76,14 +95,14 @@ function addUser() {
 function moveUser(e) {
   switch (e.key) {
     case 'ArrowLeft':
-      if (currentPosition[0] > 0) {
+      if (currentPosition[0] > gridLeft) {
         currentPosition[0] -= 10
         // console.log(currentPosition[0] > 0)
         drawUser()   
       }
       break
     case 'ArrowRight':
-      if (currentPosition[0] < (gridWidth - boardWidth)) {
+      if (currentPosition[0] < (gridWidth - boardWidth + gridLeft)) {
         currentPosition[0] += 10
         // console.log(currentPosition[0])
         drawUser()   
@@ -128,7 +147,10 @@ function checkForCollisions() {
 
 function gameOver(){
   // add game over image
-  grid.classList.add('game-over')
+
+  grid = document.getElementById("grid");
+  //grid.classList.add('game-over')
+  grid.classList.add("game-over");
   grid.innerHTML ="<div style=\"z-index: 9999; text-align: center; color: white\"><p>Since AI is doing work instead of you, you do not need rubber duck anymore, so try to stay far away from them for as long as possible!</p><div class=\"score\"><p>Score: "+score+"</div></p><button id= \"start\">Start</button></div>"
   start = document.getElementById('start')
   start.addEventListener('click', function() {

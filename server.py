@@ -1,6 +1,5 @@
 import os
 from flask import Flask, jsonify, render_template, request, send_file
-import numpy as np
 
 import chatgpt_api
 

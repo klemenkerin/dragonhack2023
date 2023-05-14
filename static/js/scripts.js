@@ -122,6 +122,9 @@ window.addEventListener('DOMContentLoaded', event => {
 
     // Add event listeners to meme button, calls meme endpoint
     document.getElementById("submit_meme").addEventListener("click", function() {
+        document.getElementById("meme_div").style.display = "block";
+        document.getElementById("game").style.display = "none";
+
         new_meme_generator_count++;
         code = document.getElementById("code").value
 
@@ -137,15 +140,15 @@ window.addEventListener('DOMContentLoaded', event => {
 
         sound = new Audio('static/assets/sounds/laugh.mp3');
         sound.play();
-        document.getElementById("saso").style.visibility = "visible";
+        document.getElementById("saso").style.display = "block";
         button = document.getElementById("offensive_meme");
-        button.style.visibility = "visible";
+        button.style.display = "block";
         button.style.position = "absolute";
         button.style.left = "";
         button.style.top = "";
         if(!check_number_of_opened_memes(new_meme_generator_count)){
             // to do : add a message that says YOU HAVE TO GET BACK TO WORK
-            document.getElementById("stop").style.visibility = "visible";
+            document.getElementById("stop").style.display = "block";
         }
     });
 
@@ -173,7 +176,7 @@ window.addEventListener('DOMContentLoaded', event => {
         // redirect user to saso yt podcast
         window.open("https://www.youtube.com/watch?v=Qz9WkFdscKs&ab_channel=Ares%2CTEGAneve%C5%A1%3F", "_blank");
     });
-      
+
 
     const fun_mode = document.getElementById("fun_mode");
 
@@ -186,22 +189,20 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("enter_button").classList.add("btn-fun");
             document.getElementById("quote").innerHTML = "For every man's action there's a woman's overreaction."
             document.getElementById("title").innerHTML = "Meme Asssistant"
-            document.getElementById("submit_button_explain").style.visibility = "hidden";
-            document.getElementById("submit_button_translate").style.visibility = "hidden";
-            document.getElementById("submit_button_structure").style.visibility = "hidden";
-            document.getElementById("submit_button_debug").style.visibility = "hidden";
-            document.getElementById("dropdowns").style.visibility = "hidden";
-            document.getElementById("code").style.visibility = "hidden";
-            document.getElementById("submit_meme").style.visibility = "visible";
-            document.getElementById("meme_div").style.visibility = "visible";
-            document.getElementById("game").style.visibility = "visible";
+            document.getElementById("submit_button_explain").style.display = "none";
+            document.getElementById("submit_button_translate").style.display = "none";
+            document.getElementById("submit_button_structure").style.display = "none";
+            document.getElementById("submit_button_debug").style.display = "none";
+            document.getElementById("dropdowns").style.display = "none";
+            document.getElementById("code").style.display = "none";
+            document.getElementById("submit_meme").style.display = "block";
+            document.getElementById("play_game").style.display = "block";
             document.getElementById("projects").style.display = "none";
             document.getElementById("smaller_title").innerText = "Generate your meme !";
             document.getElementById("page-top").classList.add("fun_mode");
             document.querySelectorAll('.buton_smile').forEach(el => el.classList.add('buton_smile_fun'));
             new_meme_generator_count=0;
             listen_to_work_press = null;
-            gameOver();
             //bubbles()  
         } else {
             mode = "serious"
@@ -211,19 +212,20 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("enter_button").classList.remove("btn-fun");
             document.getElementById("quote").innerHTML = "The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking."
             document.getElementById("title").innerHTML = "Code Assistant"
-            document.getElementById("submit_button_explain").style.visibility = "visible";
-            document.getElementById("submit_button_translate").style.visibility = "visible";
-            document.getElementById("submit_button_structure").style.visibility = "visible";
-            document.getElementById("submit_button_debug").style.visibility = "visible";
-            document.getElementById("dropdowns").style.visibility = "visible";
-            document.getElementById("code").style.visibility = "visible";
-            document.getElementById("submit_meme").style.visibility = "hidden";
-            document.getElementById("offensive_meme").style.visibility = "hidden";
+            document.getElementById("submit_button_explain").style.display = "block";
+            document.getElementById("submit_button_translate").style.display = "block";
+            document.getElementById("submit_button_structure").style.display = "block";
+            document.getElementById("submit_button_debug").style.display = "block";
+            document.getElementById("dropdowns").style.display = "block";
+            document.getElementById("code").style.display = "block";
+            document.getElementById("submit_meme").style.display = "none";
+            document.getElementById("play_game").style.display = "none";
+            document.getElementById("offensive_meme").style.display = "none";
             document.getElementById("meme_div").innerHTML = "";
-            document.getElementById("saso").style.visibility = "hidden";
-            document.getElementById("meme_div").style.visibility = "hidden";
-            document.getElementById("game").style.visibility = "hidden";
-            document.getElementById("stop").style.visibility = "hidden";
+            document.getElementById("saso").style.display = "none";
+            document.getElementById("meme_div").style.display = "none";
+            document.getElementById("game").style.display = "none";
+            document.getElementById("stop").style.display = "none";
             document.getElementById("projects").style.display = "block";
             document.getElementById("smaller_title").innerText = "Enter your code";
             document.getElementById("page-top").classList.remove("fun_mode");

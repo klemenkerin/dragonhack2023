@@ -87,20 +87,30 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8" id="meme_container">
-                        <h2 class="text-white mb-4" id="smaller_title">Enter your code</h2>                            
-                        <button class="btn btn-primary btn-fun buton_smile" id="submit_meme" style="visibility: hidden;">Press me !</button>
-                        <div id="meme_div" style="margin-top: 10px;"></div>
+
+                        <h2 class="text-white mb-4" id="smaller_title">Enter your code</h2>
+
                         <div class="row">
-                            <div class="col-sm-2">
-                                <button class="btn btn-primary btn-fun" id="offensive_meme" style="visibility: hidden; position: absolute; margin-top: 10px; margin-right: 55px;">I find this meme offensive</button>
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-fun buton_smile" id="submit_meme" style="display: none;">Generate Meme</button>
                             </div>
-                            <div class="col-sm-7">
-                                <button class="btn btn-secondary btn-fun buton_smile" id="saso" style="visibility: hidden; position: absolute; margin-top: 10px; margin-left: 55px;">I want something funnier</button>
-                                <!--Game-->
-                                <div class="center-game" style="visibility: hidden;" id="game">
-                                    <div class="grid"></div>
-                                </div>
-                                <!--Game-->
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-fun buton_smile" id="play_game" style="display: none;">Play the Ducky Game</button>
+                            </div>
+                        </div>
+
+                        <div id="meme_div" style="display:none; margin-top: 10px;"></div>
+
+                        <div class="center-game" style="display:none;" id="game">
+                            <div class="grid" id="grid"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-fun" id="offensive_meme" style="display:none; position: absolute; margin: 10px 20px 0 20px;">I find this meme offensive</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-secondary btn-fun buton_smile" id="saso" style="display:none; position: absolute; margin: 10px 20px 0 20px;">I want something funnier</button>
                             </div>
                         </div>    
                         <textarea id="code" name="code" rows="20" cols="80"></textarea>

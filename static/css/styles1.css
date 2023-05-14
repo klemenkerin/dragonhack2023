@@ -1,5 +1,4 @@
 .grid {
-  position: absolute;
   width: 560px;
   height: 300px;
   border: solid 1px black;
@@ -17,7 +16,7 @@
   height: 50px;
   border-radius: 50%;
   background-color: blueviolet;
-  background-image: url('../img/programer.png');
+  background-image: url('../assets/img/programer.png');
 }
 
 .duck {
@@ -26,11 +25,10 @@
   height: 30px;
   border-radius: 50%;
   background-color: yellow;
-  background-image: url('../img/duck.png');
+  background-image: url('../assets/img/duck.png');
 }
 
 .game-over {
-  position: absolute;
   width: 560px;
   height: 300px;
   background-color: rgba(0, 0, 0, 0.5);
