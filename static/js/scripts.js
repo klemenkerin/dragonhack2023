@@ -187,6 +187,8 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead_fun");
             document.getElementById("fun_mode").innerHTML = "Serious Mode"
             document.getElementById("enter_button").classList.add("btn-fun");
+            document.getElementById("about").classList.remove("about-section");
+            document.getElementById("about").classList.add("about-section-fun");
             document.getElementById("quote").innerHTML = "For every man's action there's a woman's overreaction."
             document.getElementById("title").innerHTML = "Meme Asssistant"
             document.getElementById("submit_button_explain").style.display = "none";
@@ -210,6 +212,8 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("header").classList.add("masthead");
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
             document.getElementById("enter_button").classList.remove("btn-fun");
+            document.getElementById("about").classList.remove("about-section-fun");
+            document.getElementById("about").classList.add("about-section");
             document.getElementById("quote").innerHTML = "The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking."
             document.getElementById("title").innerHTML = "Code Assistant"
             document.getElementById("submit_button_explain").style.display = "block";
