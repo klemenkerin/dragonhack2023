@@ -194,16 +194,17 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("code").style.visibility = "hidden";
             document.getElementById("submit_meme").style.visibility = "visible";
             document.getElementById("meme_div").style.visibility = "visible";
+            document.getElementById("game").style.visibility = "visible";
             document.getElementById("projects").style.display = "none";
             document.getElementById("smaller_title").innerText = "Generate your meme !";
             document.getElementById("page-top").classList.add("fun_mode");
             document.querySelectorAll('.buton_smile').forEach(el => el.classList.add('buton_smile_fun'));
             new_meme_generator_count=0;
             listen_to_work_press = null;
+            gameOver();
             //bubbles()  
         } else {
             mode = "serious"
-            document.getElementById("stop").style.visibility = "hidden";
             document.getElementById("header").classList.remove("masthead_fun");
             document.getElementById("header").classList.add("masthead");
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
@@ -221,6 +222,8 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("meme_div").innerHTML = "";
             document.getElementById("saso").style.visibility = "hidden";
             document.getElementById("meme_div").style.visibility = "hidden";
+            document.getElementById("game").style.visibility = "hidden";
+            document.getElementById("stop").style.visibility = "hidden";
             document.getElementById("projects").style.display = "block";
             document.getElementById("smaller_title").innerText = "Enter your code";
             document.getElementById("page-top").classList.remove("fun_mode");
