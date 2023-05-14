@@ -14,13 +14,15 @@ Welcome to <span style="font-size: 24px;">**Assistant**</span> , your ultimate <
 # Screenshots
 
 **Code assistant**<br>
-<img src="./other/code_assistant.png" alt="Code assistant" title="Code assistant" width="400" height="250"><br>
+<img src="./other/code_assistant.png" alt="Code assistant" title="Code assistant" width="500" height="300"><br>
 **Code assistant functionalities**<br>
-<img src="./other/code_assistant_2.png" alt="Code assistant functionalities" title="Code assistant functionalities" width="400" height="250"><br>
+<img src="./other/code_assistant_2.png" alt="Code assistant functionalities" title="Code assistant functionalities" width="500" height="300"><br>
 **Meme assistant**<br>
-<img src="./other/meme_assistant.png" alt="Meme assistant" title="Meme assistant" width="400" height="250"><br>
-**Meme assistant functionalities**<br>
-<img src="./other/meme_assistant_2.png" alt="Meme assistant functionalities" title="Meme assistant functionalities" width="400" height="250"><br>
+<img src="./other/meme_assistant.png" alt="Meme assistant" title="Meme assistant" width="500" height="300"><br>
+**Meme assistant meme generator**<br>
+<img src="./other/meme_assistant_meme.png" alt="Meme assistant functionalities" title="Meme assistant functionalities" width="500" height="300"><br>
+**Meme assistant duckey game**<br>
+<img src="./other/meme_assistant_duckey.png" alt="Meme assistant duckey game" title="Meme assistant duckey game" width="500" height="300"><br>
 
 
 ## Technologies Used
