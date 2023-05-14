@@ -77,7 +77,8 @@ def generate_structure():
         description = data.get('description')
         languages = data.get('languages') #list of languages
         
-        prompt = f'Generate the entire data structure (directories and populate it with files) for a program using linux terminal comands mkdir without any explanations. The program is in {languages}, with this description:\n{description}\n'
+        # prompt = f'Generate the entire data structure (directories and populate it with files) for a program using linux terminal comands mkdir without any explanations. The program is in {languages}, with this description:\n{description}\n'
+        prompt = f'Generate the entire data structure (directories and populate it with files) for a program using linux terminal comands mkdir without any explanations. The program has this description:\n{description}\n'
 
         # get the explanation
         commands, conversation = chatgpt_api.send_request(token, model, prompt, conversation)
@@ -106,7 +107,7 @@ def generate_structure():
 
         # for files or max 5 files
         i = 0
-        for file in files[:5]:
+        for file in files[:10]:
             print("at file: ", file)
 
             # prompt to generate barebone code
@@ -115,11 +116,17 @@ def generate_structure():
             # get the code
             code, conversation = chatgpt_api.send_request(token, model, prompt, conversation)
 
+            print("code")
+
             # save the code to file
+            os.system(f'touch tmp_files/{file}')
             with open(f'tmp_files/{file}', 'w') as f:
                 f.write(code)
+                
 
-            print("made file: ", file)
+            print("made file: ", file)            
+           
+           
             i += 1
 
 
@@ -162,7 +169,7 @@ if __name__ == '__main__':
         key = f.read().strip()
     
     prompt = 'Explain this code'
-    model = 'gpt-3.5-turbo'
+    model = 'gpt-4'
     token = key
     
     app.run(debug=True, port=8080)

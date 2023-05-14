@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', event => {
         },
         body: JSON.stringify({
             "description": code,
-            "languages": "Python, C" 
+            "languages": "Python" 
             })
         })
         .then(response => {
