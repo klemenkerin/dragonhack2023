@@ -137,7 +137,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
         sound = new Audio('static/assets/sounds/laugh.mp3');
         sound.play();
-
+        document.getElementById("saso").style.visibility = "visible";
         button = document.getElementById("offensive_meme");
         button.style.visibility = "visible";
         button.style.position = "absolute";
@@ -166,6 +166,12 @@ window.addEventListener('DOMContentLoaded', event => {
 
         sound = new Audio('static/assets/sounds/fart.mp3');
         sound.play();
+    });
+
+    const saso_btn = document.getElementById("saso");
+    saso_btn.addEventListener("click", function() {
+        // redirect user to saso yt podcast
+        window.open("https://www.youtube.com/watch?v=Qz9WkFdscKs&ab_channel=Ares%2CTEGAneve%C5%A1%3F", "_blank");
     });
       
 
@@ -203,7 +209,7 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("fun_mode").innerHTML = "Fun Mode"
             document.getElementById("enter_button").classList.remove("btn-fun");
             document.getElementById("quote").innerHTML = "The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking."
-            document.getElementById("title").innerHTML = "Code Asssistant"
+            document.getElementById("title").innerHTML = "Code Assistant"
             document.getElementById("submit_button_explain").style.visibility = "visible";
             document.getElementById("submit_button_translate").style.visibility = "visible";
             document.getElementById("submit_button_structure").style.visibility = "visible";
@@ -213,6 +219,7 @@ window.addEventListener('DOMContentLoaded', event => {
             document.getElementById("submit_meme").style.visibility = "hidden";
             document.getElementById("offensive_meme").style.visibility = "hidden";
             document.getElementById("meme_div").innerHTML = "";
+            document.getElementById("saso").style.visibility = "hidden";
             document.getElementById("meme_div").style.visibility = "hidden";
             document.getElementById("projects").style.display = "block";
             document.getElementById("smaller_title").innerText = "Enter your code";
