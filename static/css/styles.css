@@ -11285,3 +11285,13 @@ span {
 .margin-top {
   margin-top: 20px;
 }
+
+.btn-fun {
+  margin:auto;
+}
+
+.about-section-fun {
+  padding-top: 0;
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 20%, rgba(132, 132, 11, 0.8) 100%);
+  padding-bottom: 10rem;
+}
